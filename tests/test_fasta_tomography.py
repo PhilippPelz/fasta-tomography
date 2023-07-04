@@ -48,3 +48,6 @@ sol, out, opts = fasta_tomography_nonnegative_shrink(A, At, x0, y, mu, angles, o
 #%%
 plot(sol[128,:,:].cpu())
 plot(x[128,:,:].cpu())
+#%%
+ind= 203
+plot(y[:,ind,:].cpu().numpy(),title=f'{ind}')

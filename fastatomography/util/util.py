@@ -21,8 +21,9 @@ def R_factor(y_model, y_target):
 
 def slepian_window(N, sigma):
     from scipy.signal.windows import dpss
-    w = dpss(N[0], sigma, sym=False, norm='subsample')
-    kernel = np.outer(w, w)
+    w0 = dpss(N[0], sigma, sym=False, norm='subsample')
+    w1 = dpss(N[1], sigma, sym=False, norm='subsample')
+    kernel = np.outer(w0, w1)
     return fftshift(kernel)
 
 def get_qx_qy(M, dx, dtype=th.float):

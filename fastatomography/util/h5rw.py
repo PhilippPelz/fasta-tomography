@@ -70,8 +70,8 @@ def _h5write(filename, mode, *args, **kwargs):
     ids = []
 
     # This is needed to store strings
-    dt = h5py.new_vlen(str)
-
+    # dt = h5py.new_vlen(str)
+    dt = h5py.vlen_dtype(str)
     def check_id(id):
         if id in ids:
             raise RuntimeError('Circular reference detected! Aborting save.')

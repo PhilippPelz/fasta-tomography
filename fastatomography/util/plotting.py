@@ -12,7 +12,8 @@ from scipy.spatial.transform import Rotation as R
 
 def plot_rotating_point(angles, title='title', point=np.array([0, 0, 1]), elevation=55, azimuth=90, savePath=None,
                         dpi=300):
-    rot = R.from_rotvec(angles.T)
+    axis_string = 'YXZ'
+    rot = R.from_euler(axis_string,angles.T)
     M = rot.as_matrix()
     fig = plt.figure(dpi=dpi)
     ax = fig.add_subplot(111, projection='3d')
@@ -117,17 +118,17 @@ def save_stack_gif(save_name, stack, angles, dx, dpi=300, fps=3, duration=None):
     animation.write_gif(f'{save_name}.gif', fps=fps)
 
 
-def save_stack_movie(save_name, stack, angles, dx, dpi=300, fps=10, duration=None):
+def save_stack_movie(save_name, stack, angles, dx, dpi=300, fps=10, duration=None, vmin=None, vmax=None, cmap = 'viridis'):
     if duration is None:
         duration = stack.shape[0] / fps
 
     fig, ax = plt.subplots(dpi=dpi)
     title = 'tilt {:-3d}, alpha = {:2.2f}'
-    cmap = 'viridis'
     scale = (40 / dx, '4 nm')
     div1 = make_axes_locatable(ax)
-    vmax = stack.max()
-    imax1 = ax.imshow(stack[0], interpolation='nearest', cmap=plt.cm.get_cmap(cmap), vmax=vmax)
+    vmax = vmax if vmax is not None else stack.max()
+    vmin = vmin if vmin is not None else stack.min()
+    imax1 = ax.imshow(stack[0], interpolation='nearest', cmap=plt.cm.get_cmap(cmap), vmax=vmax, vmin=vmin)
     ax.set_title(title.format(0, angles[0]))
 
     for ax1 in [ax]:

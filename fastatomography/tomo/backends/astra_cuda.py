@@ -166,8 +166,7 @@ class AstraCudaProjectorImpl(object):
         #                          allow_copy=False)
         self.sino_id = astra.data3d.link('-sino', proj_geom, proj_data_link)
 
-        self.proj_id = astra_projector('nearest', vol_geom, proj_geom,
-                                       ndim=proj_ndim, impl='cuda')
+        self.proj_id = astra_projector('linear', vol_geom, proj_geom, ndim=proj_ndim, impl='cuda')
 
         # self.sino_id = astra_data(proj_geom,
         #                           datatype='projection',

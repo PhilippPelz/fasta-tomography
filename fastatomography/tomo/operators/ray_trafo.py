@@ -305,7 +305,7 @@ class RayTransformBase(Operator):
         """Geometry of this operator."""
         return self.__geometry
 
-    def _call(self, x, out=None, *,  angles=None):
+    def _call(self, x, out=None, *, angles=None):
         """Return ``self(x[, out])``."""
         if self.domain.is_real:
             return self._call_real(x, out, angles=angles)
@@ -499,8 +499,7 @@ class RayBackProjection(RayTransformBase):
                     print(f'self.domain.real_space {self.domain.real_space}')
                     print(f'self.range.real_space  {self.range.real_space}')
                     astra_wrapper = AstraCudaBackProjectorImpl(
-                        self.geometry, self.domain.real_space,
-                        self.range.real_space)
+                        self.geometry, self.range.real_space, self.domain.real_space)
                     self._astra_wrapper = astra_wrapper
             else:
                 # Should never happen

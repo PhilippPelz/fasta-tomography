@@ -10,7 +10,7 @@ Installation
 - 'python setup.py install' in this folder
 - [optional] 'python setup.py develop' for developer mode
 
-Getting started - TODO
+Getting started
 ===========
 - run ./tests/test_kates_data.py or ./tests/test_kates_data_multiscale.py
 
